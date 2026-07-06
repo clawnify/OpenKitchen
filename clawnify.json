@@ -1,0 +1,65 @@
+{
+  "$schema": "https://app.clawnify.com/schema/v1/clawnify.json",
+  "version": 1,
+  "name": "Open Kitchen",
+  "icon": "icon.svg",
+  "description": "Open-source restaurant & central-kitchen back-of-house software — a self-hostable alternative to Apicbase, MarketMan and Craftable. Owns the kitchen cost graph (ingredients, supplier prices, recipes and sub-recipe preps, food cost, inventory counts, production runs, supplier invoices) and tracks licenses, permits, leases and HACCP certificates with expiry reminders. Invoice scanning, sales forecasting and the daily P&L narrative are done by your Clawnify agent over the app's JSON API — the app is the system of record, the agent is the system of action, reachable on WhatsApp and email.",
+  "tags": [
+    "restaurant",
+    "back-of-house",
+    "restaurant-inventory-software",
+    "recipe-costing",
+    "food-cost",
+    "central-kitchen",
+    "haccp",
+    "catering",
+    "apicbase-alternative",
+    "marketman-alternative",
+    "craftable-alternative"
+  ],
+  "app": {
+    "framework": "react+hono",
+    "database": true,
+    "storage": true
+  },
+  "env": {
+    "optional": ["OPENROUTER_API_KEY"]
+  },
+  "deploy": {
+    "title": "Deploy your kitchen back office",
+    "subtitle": "Like Apicbase or MarketMan — recipes, food cost & inventory, run by an agent",
+    "prompts": [
+      {
+        "key": "business_name",
+        "label": "Restaurant / kitchen name",
+        "placeholder": "e.g. DIS Daily Catering",
+        "required": true
+      },
+      {
+        "key": "concept",
+        "label": "Concept & cuisine",
+        "type": "textarea",
+        "placeholder": "e.g. B2B office catering, fresh handmade daily menu, central kitchen, ~9,000 meals/month"
+      },
+      {
+        "key": "suppliers",
+        "label": "Main suppliers (optional)",
+        "type": "textarea",
+        "placeholder": "e.g. Bidfood, a local greengrocer, a fish supplier..."
+      },
+      {
+        "key": "menu",
+        "label": "A few starter recipes / dishes (optional)",
+        "type": "textarea",
+        "placeholder": "e.g. Mezze bowl, Thai green curry, focaccia..."
+      },
+      {
+        "key": "details",
+        "label": "Anything else?",
+        "type": "textarea",
+        "placeholder": "Base currency, HACCP / licenses to track, brand colors, multi-site..."
+      }
+    ]
+  },
+  "agent": "agent.md"
+}
