@@ -1,4 +1,4 @@
-<!-- Banner: run the `readme-banner` skill once there's a deployed screenshot, then drop the image here (above the H1). -->
+<img src="readme-banner.png" alt="Open Kitchen preview" />
 
 # Open Kitchen
 
