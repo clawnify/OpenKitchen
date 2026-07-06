@@ -180,6 +180,26 @@ CREATE TABLE IF NOT EXISTS production_runs (
 CREATE INDEX IF NOT EXISTS idx_production_runs_recipe ON production_runs(recipe_id, run_date);
 CREATE INDEX IF NOT EXISTS idx_production_runs_date ON production_runs(run_date);
 
+-- ─── POS item map (a POS menu item → a recipe) ──────────────────────────────
+-- The seam for POS sales sync. A POS integration (Lightspeed / unTill /
+-- MplusKASSA for the Dutch market, or Deliverect as an aggregator) pulls
+-- per-item sales; each POS product id maps to a recipe here, and the import
+-- turns "sold N of item X" into a production_run (source='pos'), which drives
+-- theoretical usage and variance — no rework, the same model manual runs use.
+-- The pull itself is the agent's job (POS credential → POST the import); this
+-- table + the import endpoint are just the target it writes to.
+CREATE TABLE IF NOT EXISTS pos_item_map (
+  id TEXT PRIMARY KEY,
+  provider TEXT NOT NULL,                     -- lightspeed | untill | mpluskassa | deliverect | ...
+  pos_item_id TEXT NOT NULL,                  -- the POS product id
+  pos_item_name TEXT,                         -- POS product name (for reference / agent matching)
+  recipe_id TEXT NOT NULL REFERENCES recipes(id) ON DELETE CASCADE,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  UNIQUE (provider, pos_item_id)
+);
+CREATE INDEX IF NOT EXISTS idx_pos_item_map_lookup ON pos_item_map(provider, pos_item_id);
+CREATE INDEX IF NOT EXISTS idx_pos_item_map_recipe ON pos_item_map(recipe_id);
+
 -- ─── Documents (licenses, permits, leases, HACCP certs — a lifecycle) ──────
 -- First-class table because the renewal reminder IS a lifecycle, not a cron job:
 -- valid -> expiring -> expired, plus reminded_at so the agent nudges once, not

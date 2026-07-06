@@ -3,6 +3,7 @@ import { get, query } from "./db";
 import { insert, update, remove, byId } from "./domain/store";
 import { allRecipeCosts, recipeCost } from "./domain/food-cost";
 import { inventory, reorder, variance } from "./domain/usage";
+import { importProduction, listPosMap, upsertPosMap } from "./domain/pos";
 import { dashboardState } from "./domain/state";
 import { getUpload } from "./uploads";
 
@@ -244,6 +245,32 @@ api.post("/api/production-runs", async (c) => {
     note: b.note,
   });
   return c.json(await byId("production_runs", id), 201);
+});
+
+// ─── POS sync (Lightspeed / unTill / MplusKASSA / Deliverect → production) ──
+// The agent maps POS menu items to recipes once, then posts a day of sales.
+api.get("/api/pos-map", async (c) =>
+  c.json(await listPosMap(c.req.query("provider"))),
+);
+api.post("/api/pos-map", async (c) => {
+  const b = await c.req.json();
+  if (!b?.provider || !b?.pos_item_id || !b?.recipe_id) {
+    return c.json({ error: "provider, pos_item_id and recipe_id required" }, 400);
+  }
+  const id = await upsertPosMap(b);
+  return c.json(await byId("pos_item_map", id), 201);
+});
+api.delete("/api/pos-map/:id", async (c) => {
+  await remove("pos_item_map", c.req.param("id"));
+  return c.json({ ok: true });
+});
+// Import one day of POS sales → production_runs. Idempotent per (provider, date).
+api.post("/api/production-runs/import", async (c) => {
+  const b = await c.req.json();
+  if (!b?.provider || !b?.date || !Array.isArray(b?.items)) {
+    return c.json({ error: "provider, date and items[] required" }, 400);
+  }
+  return c.json(await importProduction(b.provider, b.date, b.items));
 });
 
 // ─── Documents ───────────────────────────────────────────────────────────────

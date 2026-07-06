@@ -55,6 +55,16 @@ Write:
 - `POST /api/production-runs` — `{ recipe_id, qty, run_date?, source: "agent" }`.
 - `POST /api/documents` · `PATCH /api/documents/:id` (set `reminded_at` after nudging).
 
+POS sync (Lightspeed / unTill / MplusKASSA / Deliverect → production):
+
+- `GET /api/pos-map?provider=` · `POST /api/pos-map` —
+  `{ provider, pos_item_id, pos_item_name?, recipe_id }` maps one POS menu item to
+  a recipe (upsert on `provider`+`pos_item_id`).
+- `POST /api/production-runs/import` — `{ provider, date, items: [{ pos_item_id, qty,
+  name? }] }` turns a day of POS sales into `production_runs` (`source: "pos"`).
+  **Idempotent per `(provider, date)`** — safe to re-run daily. Returns
+  `{ imported, unmapped: [...] }`; `unmapped` items still need a `pos-map` row.
+
 ## Playbook
 
 1. **Scan a supplier invoice.** Owner sends a photo/PDF on WhatsApp → it lands in
@@ -75,6 +85,12 @@ Write:
    as first-class — audited kitchens depend on them.
 6. **Daily/weekly P&L narrative.** `GET /api/state` + `GET /api/variance`; write the
    short summary the owner reads over coffee.
+7. **POS sync (if a till is connected).** Once a day, pull yesterday's per-item sales
+   from the POS (Lightspeed is the widest Dutch fit; unTill and MplusKASSA are Dutch
+   too; Deliverect aggregates several). First run: `GET /api/pos-map`, and for any POS
+   item the owner sells, `POST /api/pos-map` to link it to its recipe (match by name).
+   Then `POST /api/production-runs/import` with the day's `items`; anything returned in
+   `unmapped` just needs a `pos-map` row, then re-import (it's idempotent).
 
 Keep every write idempotent-friendly: check for an existing supplier/ingredient by
 name before creating a duplicate.
