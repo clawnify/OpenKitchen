@@ -2,6 +2,8 @@
 
 # Open Kitchen
 
+[![Deploy with Clawnify](https://app.clawnify.com/deploy-button.svg)](https://app.clawnify.com/deploy?repo=clawnify/open-kitchen)
+
 Open-source **restaurant & central-kitchen back-of-house software** — a free,
 self-hostable alternative to Apicbase, MarketMan, Craftable, MarginEdge, Restaurant365,
 xtraCHEF, WISK, meez, Nory, Fullsoon and Supy. It owns your kitchen's cost graph —
