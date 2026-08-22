@@ -2,7 +2,7 @@
 
 # OpenKitchen
 
-[![Deploy with Clawnify](https://app.clawnify.com/deploy-button.svg)](https://app.clawnify.com/deploy?repo=clawnify/open-kitchen)
+[![Deploy with Clawnify](https://app.clawnify.com/deploy-button.svg)](https://app.clawnify.com/deploy?repo=clawnify/OpenKitchen)
 
 Open-source **restaurant & central-kitchen back-of-house software** — a free,
 self-hostable alternative to Apicbase, MarketMan, Craftable, MarginEdge, Restaurant365,
@@ -49,7 +49,7 @@ drift) and exposes it as a clean JSON API; the agent does the judgement. See
   valid → expiring → expired lifecycle the agent watches.
 
 Out of scope by design: statutory double-entry books, VAT and e-invoicing — that's
-[`open-books`](https://github.com/clawnify/open-books), which OpenKitchen sits neatly
+[`open-books`](https://github.com/clawnify/OpenBooks), which OpenKitchen sits neatly
 beside.
 
 ## Develop
