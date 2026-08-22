@@ -1,4 +1,4 @@
-# Open Kitchen — design
+# OpenKitchen — design
 
 This file is the **app-specific** design brief: scope, information architecture,
 and the screens. It does **not** restate visual tokens — colors, type, spacing,
@@ -8,7 +8,7 @@ visual; follow this for *what goes where*.
 
 ## Scope (the deliberate boundary)
 
-Open Kitchen owns exactly one thing nothing else on the platform models: the
+OpenKitchen owns exactly one thing nothing else on the platform models: the
 **kitchen cost graph** — `ingredient ↔ supplier price ↔ recipe/prep ↔ food cost
 ↔ inventory ↔ production ↔ supplier invoice` — plus a **documents** lifecycle for
 licenses/permits/HACCP.
@@ -20,7 +20,7 @@ It **borrows** the AI-native pieces instead of rebuilding them:
 - **Forecasting / P&L narrative / variance analysis** → the agent over the JSON
   API (`OPENROUTER_API_KEY` for prose; deterministic heuristics otherwise — same
   pattern as `open-ads-report`).
-- **Statutory books, VAT, e-invoicing** → `open-books`. Open Kitchen surfaces food
+- **Statutory books, VAT, e-invoicing** → `open-books`. OpenKitchen surfaces food
   cost and margin; it does not grow a second ledger.
 
 The app therefore does the **deterministic math** (cost roll-up, food-cost %,

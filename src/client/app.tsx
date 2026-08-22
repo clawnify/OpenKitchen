@@ -54,7 +54,7 @@ export function App() {
       <aside className="hidden w-[260px] shrink-0 flex-col border-r border-border bg-surface md:flex">
         <div className="flex items-center gap-2 px-5 py-4">
           <ChefHat className="size-5 text-primary" />
-          <span className="text-sm font-bold text-foreground">Open Kitchen</span>
+          <span className="text-sm font-bold text-foreground">OpenKitchen</span>
         </div>
         <nav className="flex-1 space-y-5 px-3 py-2">
           {GROUPS.map((g) => (

@@ -6,7 +6,7 @@ import api from "./routes";
 type Env = { Bindings: { DB: D1Database; UPLOADS: R2Bucket } };
 
 const app = createApp<Env>({
-  title: "Open Kitchen",
+  title: "OpenKitchen",
   version: "1.0.0",
   description:
     "Restaurant & central-kitchen back-of-house — recipes, food cost, inventory, production, compliance.",

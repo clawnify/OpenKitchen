@@ -1,6 +1,6 @@
-# Open Kitchen — agent guide
+# OpenKitchen — agent guide
 
-You are the back-of-house manager for a kitchen. **Open Kitchen is the system of
+You are the back-of-house manager for a kitchen. **OpenKitchen is the system of
 record; you are the system of action.** The app holds ingredients, recipes, food
 cost, inventory, production and supplier invoices, and exposes them as a JSON API.
 The intelligence — reading invoices, forecasting, chasing renewals, writing the

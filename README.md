@@ -1,6 +1,6 @@
-<img src="readme-banner.png" alt="Open Kitchen preview" />
+<img src="readme-banner.png" alt="OpenKitchen preview" />
 
-# Open Kitchen
+# OpenKitchen
 
 [![Deploy with Clawnify](https://app.clawnify.com/deploy-button.svg)](https://app.clawnify.com/deploy?repo=clawnify/open-kitchen)
 
@@ -20,7 +20,7 @@ Cloudflare Workers. Deploy your own copy in minutes, customize freely, own the d
 
 ## The idea: record vs action
 
-Most tools in this space bolt a chatbot onto a dashboard. Open Kitchen inverts it.
+Most tools in this space bolt a chatbot onto a dashboard. OpenKitchen inverts it.
 **The app is the system of record; your Clawnify agent is the system of action** —
 reachable on WhatsApp and email:
 
@@ -49,7 +49,7 @@ drift) and exposes it as a clean JSON API; the agent does the judgement. See
   valid → expiring → expired lifecycle the agent watches.
 
 Out of scope by design: statutory double-entry books, VAT and e-invoicing — that's
-[`open-books`](https://github.com/clawnify/open-books), which Open Kitchen sits neatly
+[`open-books`](https://github.com/clawnify/open-books), which OpenKitchen sits neatly
 beside.
 
 ## Develop
@@ -70,7 +70,7 @@ pnpm deploy       # deploy to Clawnify
 
 ## Open-source alternative to popular restaurant back-of-house software
 
-Open Kitchen is a free, self-hostable alternative to the leading restaurant
+OpenKitchen is a free, self-hostable alternative to the leading restaurant
 back-of-house and inventory platforms. If you're comparing tools, it covers the same
 core jobs — recipe costing, food-cost tracking, inventory counts, supplier invoices and
 purchasing — with an AI agent doing the day-to-day work over chat:

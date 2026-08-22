@@ -1,7 +1,7 @@
 {
   "$schema": "https://app.clawnify.com/schema/v1/clawnify.json",
   "version": 1,
-  "name": "Open Kitchen",
+  "name": "OpenKitchen",
   "icon": "icon.svg",
   "description": "Open-source restaurant & central-kitchen back-of-house software — a self-hostable alternative to Apicbase, MarketMan and Craftable. Owns the kitchen cost graph (ingredients, supplier prices, recipes and sub-recipe preps, food cost, inventory counts, production runs, supplier invoices) and tracks licenses, permits, leases and HACCP certificates with expiry reminders. Invoice scanning, sales forecasting and the daily P&L narrative are done by your Clawnify agent over the app's JSON API — the app is the system of record, the agent is the system of action, reachable on WhatsApp and email.",
   "tags": [
