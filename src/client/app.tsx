@@ -1,4 +1,5 @@
-import type { ComponentType } from "react";
+import { useEffect, type ComponentType } from "react";
+import { AppNav, embedded, reportLocation } from "@clawnify/app/client";
 import {
   LayoutDashboard,
   BookOpen,
@@ -49,9 +50,18 @@ const GROUPS: { title: string; items: NavItem[] }[] = [
 
 export function App() {
   const path = usePath();
+  useEffect(() => { reportLocation(window.location.pathname + window.location.search); }, [path]);
+  const icons: Record<string, string> = {
+    "/": "home", "/recipes": "book-open", "/ingredients": "wheat", "/suppliers": "truck",
+    "/inventory": "boxes", "/production": "chef-hat", "/invoices": "receipt", "/documents": "shield-check",
+  };
   return (
     <div className="flex min-h-screen">
-      <aside className="hidden w-[260px] shrink-0 flex-col border-r border-border bg-surface md:flex">
+      {embedded ? <AppNav title="Kitchen" icon="chef-hat" active={"/" + (path.split("/")[1] || "")}
+        groups={GROUPS.map(group => ({ label: group.title, items: group.items.map(item => ({
+          id: item.to, label: item.label, href: item.to, icon: icons[item.to], home: item.to === "/",
+        })) }))}
+        onNavigate={item => navigate(item.href ?? "/")} /> : <aside className="hidden w-[260px] shrink-0 flex-col border-r border-border bg-surface md:flex">
         <div className="flex items-center gap-2 px-5 py-4">
           <ChefHat className="size-5 text-primary" />
           <span className="text-sm font-bold text-foreground">OpenKitchen</span>
@@ -89,7 +99,7 @@ export function App() {
             </div>
           ))}
         </nav>
-      </aside>
+      </aside>}
       <main className="min-w-0 flex-1">
         <Route path={path} />
       </main>
