@@ -140,7 +140,12 @@ api.get("/api/invoices", async (c) =>
   ),
 );
 api.get("/api/invoices/:id", async (c) => {
-  const invoice = await byId("invoices", c.req.param("id"));
+  const invoice = await get(
+    `SELECT inv.*, s.name AS supplier_name
+       FROM invoices inv LEFT JOIN suppliers s ON s.id = inv.supplier_id
+      WHERE inv.id = ?`,
+    [c.req.param("id")],
+  );
   if (!invoice) return c.json({ error: "Not found" }, 404);
   const lines = await query(
     `SELECT il.*, i.name AS ingredient_name
