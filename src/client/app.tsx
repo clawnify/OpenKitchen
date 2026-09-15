@@ -52,12 +52,12 @@ export function App() {
   const path = usePath();
   useEffect(() => { reportLocation(window.location.pathname + window.location.search); }, [path]);
   const icons: Record<string, string> = {
-    "/": "home", "/recipes": "book-open", "/ingredients": "wheat", "/suppliers": "truck",
-    "/inventory": "boxes", "/production": "chef-hat", "/invoices": "receipt", "/documents": "shield-check",
+    "/": "home", "/recipes": "book-open", "/ingredients": "tag", "/suppliers": "truck",
+    "/inventory": "package", "/production": "layers", "/invoices": "file-text", "/documents": "check-square",
   };
   return (
     <div className="flex min-h-screen">
-      {embedded ? <AppNav title="Kitchen" icon="chef-hat" active={"/" + (path.split("/")[1] || "")}
+      {embedded ? <AppNav title="Kitchen" icon="layers" active={"/" + (path.split("/")[1] || "")}
         groups={GROUPS.map(group => ({ label: group.title, items: group.items.map(item => ({
           id: item.to, label: item.label, href: item.to, icon: icons[item.to], home: item.to === "/",
         })) }))}
