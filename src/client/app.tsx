@@ -1,5 +1,5 @@
 import { useEffect, type ComponentType } from "react";
-import { AppNav, embedded, reportLocation } from "@clawnify/app/client";
+import { AppNav, reportLocation } from "@clawnify/app/client";
 import {
   LayoutDashboard,
   BookOpen,
@@ -57,11 +57,14 @@ export function App() {
   };
   return (
     <div className="flex min-h-screen">
-      {embedded ? <AppNav title="Kitchen" icon="layers" active={"/" + (path.split("/")[1] || "")}
+      {/* One <AppNav>: inside Clawnify the dashboard draws these groups in its
+          sidebar, and anywhere else the app's own sidebar below. */}
+      <AppNav title="Kitchen" icon="layers" active={"/" + (path.split("/")[1] || "")}
         groups={GROUPS.map(group => ({ label: group.title, items: group.items.map(item => ({
           id: item.to, label: item.label, href: item.to, icon: icons[item.to], home: item.to === "/",
         })) }))}
-        onNavigate={item => navigate(item.href ?? "/")} /> : <aside className="hidden w-[260px] shrink-0 flex-col border-r border-border bg-surface md:flex">
+        onNavigate={item => navigate(item.href ?? "/")}
+        standalone={(nav) => <aside className="hidden w-[260px] shrink-0 flex-col border-r border-border bg-surface md:flex">
         <div className="flex items-center gap-2 px-5 py-4">
           <ChefHat className="size-5 text-primary" />
           <span className="text-sm font-bold text-foreground">OpenKitchen</span>
@@ -99,7 +102,8 @@ export function App() {
             </div>
           ))}
         </nav>
-      </aside>}
+        {nav.card && <div className="px-3 pb-3">{nav.card}</div>}
+      </aside>} />
       <main className="min-w-0 flex-1">
         <Route path={path} />
       </main>
