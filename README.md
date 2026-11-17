@@ -91,4 +91,4 @@ open-source restaurant software.
 
 ## License
 
-AGPL-3.0.
+MIT. See [LICENSE](LICENSE).
